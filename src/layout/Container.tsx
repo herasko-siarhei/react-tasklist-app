@@ -7,7 +7,7 @@ type ContainerProps = {
 
 const Container: FC<ContainerProps> = ({children}) => {
     return (
-        <MUIContainer maxWidth="sm" sx={{minHeight: '100vh', display: 'flex', flexDirection: 'column'}}>
+        <MUIContainer maxWidth="md" sx={{minHeight: '100vh', display: 'flex', flexDirection: 'column'}}>
             {children}
         </MUIContainer>
     );

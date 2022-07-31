@@ -1,6 +1,6 @@
 import React, {ChangeEvent, FC, memo, useState} from 'react';
 import {Button, Stack, TextField} from '@mui/material';
-import {DeleteOutlined, EditOutlined} from '@mui/icons-material';
+import {DeleteOutlined, DoneOutlined, EditOutlined} from '@mui/icons-material';
 
 import taskActions from 'redux/task/task.actions';
 import {useAppDispatch} from 'hooks/useAppDispatch';
@@ -44,11 +44,13 @@ const Task: FC<TaskProps> = (task) => {
                 disabled={!edit}
                 value={text}
                 onChange={changeText}
-                onClick={toggleCompletedTask}
                 sx={{textDecoration: task.completed ? 'line-through' : 'none'}}
                 size="small"
                 fullWidth
             />
+            <Button onClick={toggleCompletedTask} variant="outlined" color="success">
+                <DoneOutlined/>
+            </Button>
             <Button onClick={toggleEdit} variant="outlined" color="primary">
                 <EditOutlined/>
             </Button>
