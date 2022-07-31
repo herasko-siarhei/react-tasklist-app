@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {FC, useEffect} from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import authActions from 'redux/auth/auth.actions';
+import {useAppSelector} from 'hooks/useAppSelector';
+import {useAppDispatch} from 'hooks/useAppDispatch';
+
+import Container from 'layout/Container';
+import Header from 'layout/Header';
+import Footer from 'layout/Footer';
+import Main from 'layout/Main';
+import Loading from 'components/Loading';
+import Application from 'pages/Application';
+import Authentication from 'pages/Authentication';
+
+const App: FC = () => {
+    const {user, loading} = useAppSelector(state => state.auth);
+    const dispatch = useAppDispatch();
+    useEffect(() => {
+        dispatch(authActions.initialization());
+    }, [dispatch]);
+    return (
+        <Container>
+            <Header/>
+            <Main>
+                {loading ? (
+                    <Loading/>
+                ) : user ? (
+                    <Application/>
+                ) : (
+                    <Authentication/>
+                )}
+            </Main>
+            <Footer/>
+        </Container>
+    );
+};
 
 export default App;
